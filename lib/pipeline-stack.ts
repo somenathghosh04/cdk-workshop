@@ -14,10 +14,10 @@ export class WorkshopPipelineStack extends Stack {
       pipelineName: "WorkshopPipeline",
       synth: new CodeBuildStep("SynthStep", {
         input: CodePipelineSource.connection(
-        "somenathghosh04/WorkshopRepo",
+        "somenathghosh04/cdk-workshop",
         "main",
         {
-            connectionArn: "arn:aws:codeconnections:us-east-1:471303021863:connection/203a8dde-15dc-419d-94be-670e34aa3287"
+            connectionArn: "arn:aws:codeconnections:us-east-1:471303021863:connection/30510401-5307-466f-869f-5162f1dbe115"
         } 
         ),
         commands: ["npm ci", "npm run build", "npx cdk synth"],
