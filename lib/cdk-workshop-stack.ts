@@ -1,4 +1,4 @@
-import { Duration, Stack, StackProps } from 'aws-cdk-lib';
+import { CfnOutput, Duration, Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { Function,Code, Runtime} from 'aws-cdk-lib/aws-lambda';
 import { LambdaRestApi } from 'aws-cdk-lib/aws-apigateway';
@@ -6,6 +6,9 @@ import { HitCounter } from "./hitcounter";
 
 
 export class CdkWorkshopStack extends Stack {
+
+  public readonly hcEndpoint: CfnOutput;
+
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
@@ -25,6 +28,9 @@ const helloWithCounter = new HitCounter(this, "HelloHitCounter", {
       handler: helloWithCounter.handler,
     });
 
+    this.hcEndpoint = new CfnOutput(this, "GatewayUrl", {
+      value: gateway.url,
+    });
 
 }
 }
