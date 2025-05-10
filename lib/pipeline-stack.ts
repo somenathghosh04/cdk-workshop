@@ -25,8 +25,8 @@ export class WorkshopPipelineStack extends Stack {
       }),
     });
 
-    const deploy = new WorkshopPipelineStage(this, "Deploy");
-    const deployStage = pipeline.addStage(deploy);
+    const deployPipeline = new WorkshopPipelineStage(this, "Deploy");
+    const deployStageToPipeline = pipeline.addStage(deployPipeline);
 
   }
 }
