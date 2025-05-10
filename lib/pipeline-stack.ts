@@ -1,6 +1,6 @@
 import { Stack, StackProps } from "aws-cdk-lib";
 import { Repository } from "aws-cdk-lib/aws-codecommit";
-import { CodeBuildStep, CodePipeline, CodePipelineSource } from "aws-cdk-lib/pipelines";
+import { CodeBuildStep, CodePipeline, CodePipelineSource, ManualApprovalStep } from "aws-cdk-lib/pipelines";
 import { Construct } from "constructs";
 import { WorkshopPipelineStage } from "./pipeline-stage";
 
@@ -25,8 +25,11 @@ export class WorkshopPipelineStack extends Stack {
       }),
     });
 
-    const deployPipeline = new WorkshopPipelineStage(this, "Deploy");
-    const deployStageToPipeline = pipeline.addStage(deployPipeline);
+    const approvalStep = new ManualApprovalStep('ApproveDeployment');
+
+    const deploy = new WorkshopPipelineStage(this, "Deploy");
+    const deployStage = pipeline.addStage(deploy);
+    deployStage.addPre(new ManualApprovalStep('ApproveDeployment'));
 
   }
 }
