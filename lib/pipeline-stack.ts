@@ -25,11 +25,11 @@ export class WorkshopPipelineStack extends Stack {
       }),
     });
 
-    const approvalStep = new ManualApprovalStep('ApproveDeployment');
+    // const approvalStep = new ManualApprovalStep('ApproveDeployment');
 
-    const deploy = new WorkshopPipelineStage(this, "Deploy");
-    const deployStage = pipeline.addStage(deploy);
-    deployStage.addPre(new ManualApprovalStep('ApproveDeployment'));
+    // const deploy = new WorkshopPipelineStage(this, "Deploy");
+    // const deployStage = pipeline.addStage(deploy);
+    // deployStage.addPre(new ManualApprovalStep('ApproveDeployment'));
 
   }
 }
